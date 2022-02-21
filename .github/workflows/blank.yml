@@ -42,7 +42,9 @@ jobs:
           wget -E -H -k -p www.google.com
           pwd
           ls -la
-      - name: "TESTS: Run W3C validation."
+          cd www.google.com
+          ls -la
+      - name: "TESTS: Run W3C validation from absolute path."
         continue-on-error: true
         uses: Cyb3r-Jak3/html5validator-action@v7.0.0
         with:
@@ -51,3 +53,16 @@ jobs:
           log_level: INFO # DEBUG, INFO, WARNING
           css: true # Check CSS.
         timeout-minutes: 30
+      - name: "Copy files to relative path."
+        run: | 
+          cp -R /tmp/artifacts/w3c w3c
+          cd w3c
+          pwd
+          ls -la
+      - name: "TESTS: Run W3C validation from absolute path."
+        uses: Cyb3r-Jak3/html5validator-action@v7.0.0
+        with:
+          root: w3c
+          format: text # json, xml, gnu
+          log_level: INFO # DEBUG, INFO, WARNING
+          css: true # Check CSS.
