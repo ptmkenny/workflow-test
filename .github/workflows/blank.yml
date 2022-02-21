@@ -59,7 +59,7 @@ jobs:
           cd w3c
           pwd
           ls -la
-      - name: "TESTS: Run W3C validation from absolute path."
+      - name: "TESTS: Run W3C validation from relative path."
         uses: Cyb3r-Jak3/html5validator-action@v7.0.0
         with:
           root: w3c
